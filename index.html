@@ -172,12 +172,12 @@ footer small{display:block;margin-top:44px;color:#4e6283;font-size:11px;letter-s
 .scn:first-child{opacity:1}
 .lfade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,var(--scene,#062A33) 0%,var(--scene,#062A33) 24%,rgba(0,0,0,0) 46%),linear-gradient(to bottom,rgba(5,11,22,.75),rgba(5,11,22,0) 14%);transition:background .8s}
 .lcaps{position:absolute;left:var(--pad);right:var(--pad);bottom:calc(env(safe-area-inset-bottom) + 34px);max-width:560px;height:200px}
-.lnav{position:absolute;left:0;top:0;display:flex;gap:14px;margin-bottom:14px;font-weight:800;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.lnav{position:absolute;left:0;top:0;display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:14px;font-weight:800;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 .lnav span{transition:color .4s}
 .lnav span.cur{color:#fff}
 .lcap{position:absolute;left:0;right:0;bottom:0}
 .lcap .h{font-size:clamp(46px,14vw,110px);text-shadow:0 6px 30px rgba(0,0,0,.35)}
-.lcap .p{color:rgba(255,255,255,.82)}
+.lcap .p{color:rgba(255,255,255,.82);padding-right:66px}
 
 /* ---------- desktop ---------- */
 @media (min-aspect-ratio:9/10) and (min-width:820px){
@@ -197,6 +197,7 @@ footer small{display:block;margin-top:44px;color:#4e6283;font-size:11px;letter-s
   .lfade{background:linear-gradient(to right,var(--scene,#062A33) 0%,var(--scene,#062A33) 34%,rgba(0,0,0,0) 52%),linear-gradient(to bottom,rgba(5,11,22,.6),rgba(5,11,22,0) 14%)}
   .lcaps{bottom:auto;top:50%;transform:translateY(-50%);width:min(44vw,560px);height:250px}
   .lcap .h{font-size:clamp(48px,6.2vw,100px)}
+  .lcap .p{padding-right:0}
 }
 .kling .top,.kling .caps,.kling .vignette,.kling .hint,.kling .rail,.kling .fab,.kling .spot,.kling .callout{display:none!important}
 @media (prefers-reduced-motion:reduce){
@@ -282,17 +283,21 @@ footer small{display:block;margin-top:44px;color:#4e6283;font-size:11px;letter-s
 
 <section id="lugares" aria-label="Pra onde você vai levar">
   <div class="lpin">
+    <img class="scn" src="img/cena-adega.webp" alt="GelaBox no balcão de uma adega, com geladeiras de cerveja ao fundo" decoding="async">
     <img class="scn" src="img/cena-praia.webp" alt="GelaBox na areia da praia, com amigos ao fundo" decoding="async">
     <img class="scn" src="img/cena-churrasco.webp" alt="GelaBox na mesa de madeira de um churrasco no quintal" decoding="async">
     <img class="scn" src="img/cena-lago.webp" alt="GelaBox no deck de um lago ao pôr do sol" decoding="async">
     <img class="scn" src="img/cena-futebol.webp" alt="GelaBox no gramado de um campo de futebol à noite" decoding="async">
+    <img class="scn" src="img/cena-resenha.webp" alt="GelaBox na mesa de uma resenha na chácara, com piscina e amigos ao fundo" decoding="async">
     <div class="lfade"></div>
     <div class="lcaps">
-      <div class="lnav" aria-hidden="true"><span>Praia</span><span>Churrasco</span><span>Lago</span><span>Futebol</span></div>
-      <div class="lcap" data-l="0"><span class="eyebrow fade">Pra onde você vai?</span><h2 class="h"><span class="ln"><span>Praia.</span></span></h2><p class="p fade" style="--i:1">Areia quente, cerveja gelada.</p></div>
-      <div class="lcap" data-l="1"><span class="eyebrow fade">Pra onde você vai?</span><h2 class="h"><span class="ln"><span>Churrasco.</span></span></h2><p class="p fade" style="--i:1">A carne na brasa e a bebida no ponto.</p></div>
-      <div class="lcap" data-l="2"><span class="eyebrow fade">Pra onde você vai?</span><h2 class="h"><span class="ln"><span>Lago.</span></span></h2><p class="p fade" style="--i:1">Do fim da tarde até o pôr do sol.</p></div>
-      <div class="lcap" data-l="3"><span class="eyebrow fade">Pra onde você vai?</span><h2 class="h"><span class="ln"><span>Futebol.</span></span></h2><p class="p fade" style="--i:1">Acabou o jogo, a resenha tá gelada.</p></div>
+      <div class="lnav" aria-hidden="true"><span>Adega</span><span>Praia</span><span>Churrasco</span><span>Lago</span><span>Futebol</span><span>Resenha</span></div>
+      <div class="lcap" data-l="0"><span class="eyebrow fade">Onde tudo começa</span><h2 class="h"><span class="ln"><span>Adega.</span></span></h2><p class="p fade" style="--i:1">Sai do balcão já gelada.</p></div>
+      <div class="lcap" data-l="1"><span class="eyebrow fade">Pra onde você vai?</span><h2 class="h"><span class="ln"><span>Praia.</span></span></h2><p class="p fade" style="--i:1">Areia quente, cerveja gelada.</p></div>
+      <div class="lcap" data-l="2"><span class="eyebrow fade">Pra onde você vai?</span><h2 class="h"><span class="ln"><span>Churrasco.</span></span></h2><p class="p fade" style="--i:1">A carne na brasa e a bebida no ponto.</p></div>
+      <div class="lcap" data-l="3"><span class="eyebrow fade">Pra onde você vai?</span><h2 class="h"><span class="ln"><span>Lago.</span></span></h2><p class="p fade" style="--i:1">Do fim da tarde até o pôr do sol.</p></div>
+      <div class="lcap" data-l="4"><span class="eyebrow fade">Pra onde você vai?</span><h2 class="h"><span class="ln"><span>Futebol.</span></span></h2><p class="p fade" style="--i:1">Acabou o jogo, a resenha tá gelada.</p></div>
+      <div class="lcap" data-l="5"><span class="eyebrow fade">Pra onde você vai?</span><h2 class="h"><span class="ln"><span>Resenha.</span></span></h2><p class="p fade" style="--i:1">Som ligado e a gela garantida.</p></div>
     </div>
   </div>
 </section>
@@ -313,7 +318,7 @@ footer small{display:block;margin-top:44px;color:#4e6283;font-size:11px;letter-s
     <div class="rv">
       <span class="eyebrow fade">Pra todo rolê</span>
       <h2 class="h"><span class="ln"><span>Esqueceu</span></span><span class="ln" style="--i:1"><span>o cooler?</span></span><span class="ln" style="--i:2"><span class="r"><i>Pede na adega.</i></span></span></h2>
-      <div class="tags fade" style="--i:3"><span>Churrasco</span><span>Praia</span><span>Lago</span><span>Futebol</span><span>Resenha</span></div>
+      <div class="tags fade" style="--i:3"><span>Churrasco</span><span>Praia</span><span>Lago</span><span>Futebol</span><span>Resenha</span><span>Chácara</span></div>
     </div>
   </div>
 </section>
@@ -379,7 +384,7 @@ setInterval(function(){if(SEQ.ready&&tCur>=SEQ.T0)seekSeq()},250);
 
 /* ---------------- lugares ---------------- */
 (function(){var sec=document.getElementById("lugares"),imgs=sec.querySelectorAll(".scn"),caps=sec.querySelectorAll(".lcap"),nav=sec.querySelectorAll(".lnav span"),
-  COL=["#062A33","#2A1206","#2A1424","#061A12"],N=imgs.length,cur=-1,req=0;
+  COL=["#2A1A08","#062A33","#2A1206","#2A1424","#061A12","#101C2C"],N=imgs.length,cur=-1,req=0;
   sec.style.height="calc(100svh + "+(N*80)+"svh)";
   function upd(){req=0;var r=sec.getBoundingClientRect(),len=sec.offsetHeight-innerHeight,p=Math.min(N-.001,Math.max(0,-r.top/Math.max(1,len)*N));
     for(var i=1;i<N;i++){var o=Math.min(1,Math.max(0,(p-i+.3)/.3));imgs[i].style.opacity=o.toFixed(3)}
