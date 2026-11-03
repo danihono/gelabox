@@ -246,8 +246,8 @@ footer small{display:block;margin-top:44px;color:#4e6283;font-size:11px;letter-s
 
       <div class="cap" data-cap="cap2">
         <span class="eyebrow fade">Ou, se preferir</span>
-        <h2 class="h"><span class="ln"><span>12 latas</span></span><span class="ln" style="--i:1"><span class="r">de 350 ml.</span></span></h2>
-        <p class="p fade" style="--i:2">Mais os mesmos <strong>2,5 kg de gelo.</strong></p>
+        <h2 class="h"><span class="ln"><span>Combo</span></span><span class="ln" style="--i:1"><span class="r">completo.</span></span></h2>
+        <p class="p fade" style="--i:2">Uma garrafa e 6 latas, mais os mesmos <strong>2,5 kg de gelo.</strong></p>
       </div>
 
       <div class="cap" data-cap="hours">
@@ -257,12 +257,11 @@ footer small{display:block;margin-top:44px;color:#4e6283;font-size:11px;letter-s
       </div>
 
       <div class="cap" data-cap="benef">
-        <span class="eyebrow fade">Resistente por fora</span>
+        <span class="eyebrow fade">Na lateral</span>
         <ul class="list fade" id="blist">
-          <li><em>01</em>Mantém gelado</li>
-          <li><em>02</em>Resistente</li>
-          <li><em>03</em>Leve e prática</li>
-          <li><em>04</em>Reutilizável</li>
+          <li><em>01</em>Temperatura certa</li>
+          <li><em>02</em>Reutilizável</li>
+          <li><em>03</em>@GelaboxBrasil</li>
         </ul>
       </div>
 
@@ -370,7 +369,9 @@ var fab=document.getElementById("fab");
 function blobURL(id){var b=atob(document.getElementById(id).textContent.trim()),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return URL.createObjectURL(new Blob([u],{type:"video/mp4"}))}
 /* ice clip: generated from the 3D render at t=12.8; source crop x300 of 1920, scaled to 704 */
 var SC=704/1320,SEQ={v:document.getElementById("seqv"),ready:false,busy:false,want:0,X:(959.5-300)*SC,Y:492.2*SC,PPU:270*SC,T0:12.8,T1:14.7};
-(function(){var v=SEQ.v;if(location.hash==="#kling")return;
+/* gelo.mp4 still shows the previous artwork: off until re-rendered (#kling) — the live 3D ice/bottles play instead */
+var USE_SEQ=false;
+(function(){var v=SEQ.v;if(!USE_SEQ||location.hash==="#kling")return;
   v.addEventListener("loadeddata",function(){SEQ.ready=true;dirty=true;seekSeq();start&&start()});
   v.addEventListener("seeked",function(){SEQ.busy=false;seekSeq()});
   setTimeout(function(){v.src="video/gelo.mp4";v.load()},1200)})();
@@ -428,8 +429,11 @@ function cTex(w,h,draw,rep){var c=document.createElement("canvas");c.width=w;c.h
 function noise(g,w,h,a){var d=g.getImageData(0,0,w,h),p=d.data;for(var i=0;i<p.length;i+=4){var n=(Math.random()-.5)*a;p[i]+=n;p[i+1]+=n;p[i+2]+=n}g.putImageData(d,0,0)}
 var kraftTex=cTex(256,256,function(g,w,h){g.fillStyle="#c98f57";g.fillRect(0,0,w,h);
   for(var x=0;x<w;x+=8){g.fillStyle="rgba(90,50,15,.10)";g.fillRect(x,0,3,h)}noise(g,w,h,18)},[3,3]);
-var blueTex=cTex(128,128,function(g,w,h){g.fillStyle="#1f5fe0";g.fillRect(0,0,w,h);
-  g.fillStyle="rgba(8,30,90,.45)";for(var y=8;y<h;y+=16)for(var x=(y/16%2?16:8);x<w;x+=16){g.beginPath();g.arc(x,y,2.6,0,6.3);g.fill()}noise(g,w,h,10)},[14,14]);
+function flake(g,x,y,r){g.beginPath();for(var a=0;a<6;a++){var c=Math.cos(a*Math.PI/3),s=Math.sin(a*Math.PI/3);g.moveTo(x,y);g.lineTo(x+c*r,y+s*r);
+  var bx=x+c*r*.55,by=y+s*r*.55,c1=Math.cos(a*Math.PI/3+.7),s1=Math.sin(a*Math.PI/3+.7),c2=Math.cos(a*Math.PI/3-.7),s2=Math.sin(a*Math.PI/3-.7);
+  g.moveTo(bx,by);g.lineTo(bx+c1*r*.35,by+s1*r*.35);g.moveTo(bx,by);g.lineTo(bx+c2*r*.35,by+s2*r*.35)}g.stroke()}
+var blueTex=cTex(256,256,function(g,w,h){g.fillStyle="#1f5fe0";g.fillRect(0,0,w,h);
+  g.strokeStyle="rgba(8,26,80,.7)";g.lineWidth=2.4;g.lineCap="round";for(var y=32,r=0;y<h;y+=64,r++)for(var x=r%2?0:32;x<=w;x+=64)flake(g,x,y,13);noise(g,w,h,10)},[4.5,4.5]);
 var innerTex=cTex(128,128,function(g,w,h){g.fillStyle="#2366e6";g.fillRect(0,0,w,h);
   g.fillStyle="rgba(10,40,120,.35)";for(var y=8;y<h;y+=16)for(var x=(y/16%2?16:8);x<w;x+=16){g.beginPath();g.arc(x,y,2.2,0,6.3);g.fill()}noise(g,w,h,10)},[5,4]);
 function glowTex(stops){return cTex(128,128,function(g,w,h){var r=g.createRadialGradient(64,64,0,64,64,64);
@@ -542,17 +546,17 @@ var KF=[
  {t:.5,  rot:.62,       el:.17, span:1.72,tgt:[0,.2,0],glow:1},
  {t:1.7, rot:TAU+.25,   el:.1,  span:2.05,tgt:[0,.18,0],glow:.45},
  {t:2.3, rot:TAU+.4,    el:.1,  span:2.05,tgt:[0,.18,0],glow:.45},
- {t:3.2, rot:TAU+HP-.34,el:.13, span:.7,  tgt:face("left",.52,.27),glow:.12,spot:1},
- {t:4.2, rot:TAU+HP-.24,el:.08, span:.66, tgt:face("left",.52,.28),glow:.12,spot:1},
- {t:4.9, rot:TAU+HP-.16,el:.0,  span:.66, tgt:face("left",.52,.53),glow:.12,spot:1},
- {t:5.9, rot:TAU+HP-.08,el:-.04,span:.62, tgt:face("left",.52,.54),glow:.12,spot:1},
- {t:6.9, rot:TAU+.3,    el:.06, span:.84, tgt:face("front",.71,.87),glow:.12,spot:1},
- {t:7.9, rot:TAU+.2,    el:.12, span:.8,  tgt:face("front",.71,.87),glow:.12,spot:1},
- {t:8.8, rot:TAU-HP+.3, el:.06, span:.46, tgt:face("right",.36,.19),glow:.12,spot:1},
- {t:9.4, rot:TAU-HP+.27,el:.05, span:.46, tgt:face("right",.36,.315),glow:.12,spot:1},
- {t:10.0,rot:TAU-HP+.24,el:.04, span:.46, tgt:face("right",.36,.43),glow:.12,spot:1},
- {t:10.6,rot:TAU-HP+.21,el:.03, span:.46, tgt:face("right",.36,.548),glow:.12,spot:1},
- {t:11.0,rot:TAU-HP+.2, el:.03, span:.46, tgt:face("right",.36,.55),glow:.12,spot:1},
+ {t:3.2, rot:TAU+HP-.34,el:.13, span:.7,  tgt:face("left",.27,.42),glow:.12,spot:1},
+ {t:4.2, rot:TAU+HP-.26,el:.08, span:.66, tgt:face("left",.27,.43),glow:.12,spot:1},
+ {t:4.9, rot:TAU+HP-.16,el:.04, span:.66, tgt:face("left",.74,.43),glow:.12,spot:1},
+ {t:5.9, rot:TAU+HP-.1, el:.0,  span:.62, tgt:face("left",.74,.44),glow:.12,spot:1},
+ {t:6.9, rot:TAU+.3,    el:.06, span:.84, tgt:face("front",.6,.885),glow:.12,spot:1},
+ {t:7.9, rot:TAU+.2,    el:.12, span:.8,  tgt:face("front",.6,.885),glow:.12,spot:1},
+ {t:8.8, rot:TAU-HP+.3, el:.06, span:.5,  tgt:face("right",.5,.28),glow:.12,spot:1},
+ {t:9.4, rot:TAU-HP+.27,el:.05, span:.5,  tgt:face("right",.5,.36),glow:.12,spot:1},
+ {t:10.0,rot:TAU-HP+.24,el:.04, span:.46, tgt:face("right",.5,.555),glow:.12,spot:1},
+ {t:10.6,rot:TAU-HP+.21,el:.03, span:.46, tgt:face("right",.32,.65),glow:.12,spot:1},
+ {t:11.0,rot:TAU-HP+.2, el:.03, span:.46, tgt:face("right",.32,.655),glow:.12,spot:1},
  {t:12.0,rot:TAU+.5,    el:.45, span:2.15,tgt:[0,.15,0],glow:.8,open:0,wide:1.5},
  {t:12.8,rot:TAU+.62,   el:.66, span:2.2, tgt:[0,.22,0],glow:.9,open:1,wide:1.5},
  {t:13.7,rot:TAU+.72,   el:.64, span:2.2, tgt:[0,.22,0],glow:.7,open:1,ice:1,wide:1.5},
@@ -607,7 +611,7 @@ function setCap(t){
   if(name!==curCap){if(curCap&&capEls[curCap])capEls[curCap].classList.remove("on");
     if(name&&capEls[name])capEls[name].classList.add("on");
     if(name==="hours")runCount();curCap=name;clT=performance.now()}
-  if(name==="benef"){var idx=Math.max(0,Math.min(3,Math.round((t-8.8)/.6)));blis.forEach(function(li,n){li.classList.toggle("cur",n===idx)})}
+  if(name==="benef"){var idx=Math.max(0,Math.min(2,Math.round((t-9.4)/.6)));blis.forEach(function(li,n){li.classList.toggle("cur",n===idx)})}
   if(t>.3)hint.classList.add("gone");
   fab.classList.toggle("show",t>1.2||!inStage);
   railFill.style.height=(Math.min(1,t/TMAX)*100)+"%";
