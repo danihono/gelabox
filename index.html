@@ -369,9 +369,7 @@ var fab=document.getElementById("fab");
 function blobURL(id){var b=atob(document.getElementById(id).textContent.trim()),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return URL.createObjectURL(new Blob([u],{type:"video/mp4"}))}
 /* ice clip: generated from the 3D render at t=12.8; source crop x300 of 1920, scaled to 704 */
 var SC=704/1320,SEQ={v:document.getElementById("seqv"),ready:false,busy:false,want:0,X:(959.5-300)*SC,Y:492.2*SC,PPU:270*SC,T0:12.8,T1:14.7};
-/* gelo.mp4 still shows the previous artwork: off until re-rendered (#kling) — the live 3D ice/bottles play instead */
-var USE_SEQ=false;
-(function(){var v=SEQ.v;if(!USE_SEQ||location.hash==="#kling")return;
+(function(){var v=SEQ.v;if(location.hash==="#kling")return;
   v.addEventListener("loadeddata",function(){SEQ.ready=true;dirty=true;seekSeq();start&&start()});
   v.addEventListener("seeked",function(){SEQ.busy=false;seekSeq()});
   setTimeout(function(){v.src="video/gelo.mp4";v.load()},1200)})();
